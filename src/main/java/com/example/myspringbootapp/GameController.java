@@ -20,7 +20,7 @@ public class GameController {
 
     @GetMapping("/info")
     public String getInfo() {
-        return "Tervetuloa visailupeliin! Käytä endpointteja ohjatakseesi peliä.";
+        return "Tervetuloa visailupeliin! Käytä endpointteja ohjatakseesi peliä. /question näyttää kysymyksen ja /answer?answerIndex=x antaa vastauksen. Vaihda x numeroksi joka vastaa annettuja vaihtoehtoja, esim. answer?answerIndex=0 olisi ensimmäinen vaihtoehto";
     }
 
     @GetMapping("/question")
