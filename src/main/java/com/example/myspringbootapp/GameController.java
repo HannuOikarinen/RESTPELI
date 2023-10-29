@@ -13,8 +13,8 @@ public class GameController {
     public GameController() {
         quizGame = new QuizGame();
         // Lisää tässä kysymyksesi quizGameen esimerkiksi:
-        quizGame.addQuestion(new Question("Mikä on ensimmäinen pääkaupunki?", List.of("Helsinki", "Turku", "Tampere", "Oulu"), 0));
-        quizGame.addQuestion(new Question("Mikä on suurin järvemme?", List.of("Saimaa", "Päijänne", "Inari", "Lappajärvi"), 0));
+        quizGame.addQuestion(new Question("Mikä on Suomen pääkaupunki?", List.of("Helsinki", "Turku", "Tampere", "Oulu"), 0));
+        quizGame.addQuestion(new Question("Mikä on Suomen suurin järvi?", List.of("Saimaa", "Päijänne", "Inari", "Lappajärvi"), 0));
         // Voit lisätä enemmän kysymyksiä tarvittaessa
     }
 
@@ -24,8 +24,14 @@ public class GameController {
     }
 
     @GetMapping("/question")
-    public Question getCurrentQuestion() {
-        return quizGame.getCurrentQuestion();
+    public QuestionRepresentation getCurrentQuestion() {
+        Question currentQuestion = quizGame.getCurrentQuestion();
+        if (currentQuestion != null) {
+            // Luo QuestionRepresentation-olio, joka sisältää vain kysymyksen ja vaihtoehdot
+            return new QuestionRepresentation(currentQuestion.getQuestionText(), currentQuestion.getOptions());
+        } else {
+            return null;
+        }
     }
 
     @PostMapping("/answer")
